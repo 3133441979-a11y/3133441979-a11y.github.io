@@ -419,60 +419,116 @@ body.is-ready .loading-screen {
 .profile-board {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  padding: 16px;
+  column-gap: 18px;
+  row-gap: 12px;
+  padding: 18px 14px 20px;
+  border-width: 6px;
+  border-radius: 12px;
+  background:
+    linear-gradient(90deg, rgba(255, 246, 190, 0.28), transparent 16% 84%, rgba(127, 48, 24, 0.12)),
+    repeating-linear-gradient(0deg, #f4b34e 0 11px, #de8d36 11px 16px);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 219, 116, 0.42),
+    var(--shadow);
 }
 
 .profile-card {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 10px;
   min-width: 0;
   text-align: center;
 }
 
 .portrait {
   position: relative;
-  width: min(100%, 132px);
+  width: min(100%, 124px);
   aspect-ratio: 1;
-  margin: 0 auto 10px;
-  border: 4px solid var(--wood-red);
-  border-radius: 8px;
+  margin: 0;
+  border: 4px solid #a73a24;
+  border-radius: 4px;
   background:
-    linear-gradient(rgba(255, 247, 208, 0.62), rgba(255, 247, 208, 0.16)),
-    linear-gradient(180deg, #b5ec54 0 42%, #8fd948 42% 100%);
+    linear-gradient(#fffdf1, #fff7d8);
+  box-shadow:
+    0 0 0 4px #fff8d8,
+    0 0 0 7px #672915,
+    5px 5px 0 rgba(82, 35, 20, 0.2);
   overflow: hidden;
+}
+
+.portrait::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 2px solid rgba(151, 60, 35, 0.28);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .profile-avatar {
   display: block;
   position: absolute;
   left: 50%;
-  bottom: -5px;
-  width: auto;
-  height: 116%;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transform: translateX(-50%);
-  image-rendering: auto;
+  image-rendering: pixelated;
 }
 
 .portrait--groom .profile-avatar {
-  height: 122%;
-  bottom: -12px;
+  object-position: center 48%;
 }
 
 .portrait--bride .profile-avatar {
-  height: 118%;
-  bottom: -9px;
+  object-position: center 48%;
 }
 
 .profile-card p {
+  position: relative;
   margin: 0;
-  display: inline-block;
-  max-width: 100%;
-  padding: 8px 10px;
-  border: 3px solid var(--wood-red);
-  border-radius: 6px;
-  background: var(--paper);
+  width: min(100%, 134px);
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 7px 14px;
+  border: 3px solid #b84225;
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.36), transparent 70%),
+    linear-gradient(#ffe7a0, #ffd36b);
   color: var(--wood-dark);
-  font-size: 15px;
+  box-shadow:
+    inset 0 0 0 2px #fff1b8,
+    3px 3px 0 rgba(82, 35, 20, 0.16);
+  font-size: 14px;
   font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.profile-card p::before,
+.profile-card p::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  width: 10px;
+  height: calc(100% - 10px);
+  border: 3px solid #b84225;
+  border-radius: 3px;
+  background: linear-gradient(#ffe9a8, #ffc85f);
+}
+
+.profile-card p::before {
+  left: -9px;
+}
+
+.profile-card p::after {
+  right: -9px;
 }
 
 .paper-panel {
