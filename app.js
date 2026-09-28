@@ -50,11 +50,6 @@ function bindText() {
     mapLink.href = weddingConfig.mapUrl;
   }
 
-  const groomInitial = $('[data-initial="groom"]');
-  const brideInitial = $('[data-initial="bride"]');
-  if (groomInitial) groomInitial.textContent = weddingConfig.groomName.slice(0, 1);
-  if (brideInitial) brideInitial.textContent = weddingConfig.brideName.slice(0, 1);
-
   document.title = `${weddingConfig.groomName} & ${weddingConfig.brideName}的婚礼邀请函`;
 }
 

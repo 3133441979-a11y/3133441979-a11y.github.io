@@ -439,48 +439,189 @@ body.is-ready .loading-screen {
   overflow: hidden;
 }
 
-.portrait span {
-  position: absolute;
-  inset: 18%;
-  display: grid;
-  place-items: center;
-  border: 4px solid #43251b;
-  border-radius: 8px 8px 18px 18px;
-  color: #43251b;
-  font-size: 38px;
-  font-weight: 900;
+.profile-person,
+.profile-person span {
+  display: block;
 }
 
-.portrait span::before,
-.portrait span::after {
+.profile-person {
+  position: absolute;
+  left: 50%;
+  bottom: 11%;
+  width: 70px;
+  height: 94px;
+  transform: translateX(-50%);
+}
+
+.profile-person__head {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: 4px solid #43251b;
+  border-radius: 8px;
+  background: #ffd4ba;
+  transform: translateX(-50%);
+}
+
+.profile-person__head::before,
+.profile-person__head::after {
   content: "";
   position: absolute;
-  top: 38%;
-  width: 8px;
-  height: 10px;
+  top: 17px;
+  width: 5px;
+  height: 7px;
   border-radius: 2px;
   background: #43251b;
 }
 
-.portrait span::before {
-  left: 25%;
+.profile-person__head::before {
+  left: 9px;
 }
 
-.portrait span::after {
-  right: 25%;
+.profile-person__head::after {
+  right: 9px;
 }
 
-.portrait--groom span {
+.profile-person__hair {
+  position: absolute;
+  left: 50%;
+  top: 9px;
+  z-index: 4;
+  width: 50px;
+  height: 24px;
+  border: 4px solid #43251b;
+  border-bottom: 0;
+  border-radius: 14px 14px 4px 4px;
+  background: #4a271f;
+  transform: translateX(-50%);
+}
+
+.profile-person__body {
+  position: absolute;
+  left: 50%;
+  top: 58px;
+  z-index: 2;
+  width: 46px;
+  height: 32px;
+  border: 4px solid #43251b;
+  border-radius: 7px 7px 4px 4px;
+  transform: translateX(-50%);
+}
+
+.profile-person__body::before,
+.profile-person__body::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  width: 6px;
+  height: 24px;
+  background: #ffd4ba;
+  box-shadow: 0 0 0 3px #43251b;
+}
+
+.profile-person__body::before {
+  left: -14px;
+}
+
+.profile-person__body::after {
+  right: -14px;
+}
+
+.profile-person__legs {
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  z-index: 1;
+  width: 12px;
+  height: 28px;
+  border: 4px solid #43251b;
+  background: #2f3335;
+  box-shadow: 18px 0 0 #2f3335, 18px 0 0 4px #43251b;
+}
+
+.profile-person--groom .profile-person__body {
   background:
-    linear-gradient(#4a271f 0 24%, transparent 24%),
-    linear-gradient(180deg, #ffd4ba 0 62%, #f7f7f7 62% 76%, #3b3b3b 76%);
+    linear-gradient(90deg, transparent 0 14px, #fff 14px 24px, transparent 24px),
+    linear-gradient(135deg, #24272a 0 44%, #fff 45% 54%, #24272a 55%);
 }
 
-.portrait--bride span {
+.profile-person--groom .profile-person__body::before,
+.profile-person--groom .profile-person__body::after {
+  background: #24272a;
+}
+
+.profile-person--groom .profile-person__head {
+  box-shadow: inset 0 -5px 0 rgba(246, 180, 144, 0.45);
+}
+
+.profile-person--bride {
+  height: 100px;
+  bottom: 8%;
+}
+
+.profile-person__veil {
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  z-index: 1;
+  width: 64px;
+  height: 78px;
+  border: 4px solid rgba(67, 37, 27, 0.82);
+  border-radius: 28px 28px 12px 12px;
+  background: rgba(255, 255, 255, 0.78);
+  transform: translateX(-50%);
+}
+
+.profile-person__flower {
+  position: absolute;
+  right: 6px;
+  top: 5px;
+  z-index: 6;
+  width: 18px;
+  height: 18px;
+  border: 4px solid #ff82a2;
+  border-radius: 50%;
+  background: #fff1f5;
+  box-shadow: -10px 2px 0 -3px #ffffff, -10px 2px 0 1px #ff82a2;
+}
+
+.profile-person--bride .profile-person__hair {
+  width: 46px;
+  height: 28px;
+  background: #8b4a29;
+}
+
+.profile-person--bride .profile-person__body {
+  top: 56px;
+  width: 44px;
+  height: 24px;
+  border-radius: 8px 8px 2px 2px;
+  background: #ffffff;
+}
+
+.profile-person--bride .profile-person__body::before,
+.profile-person--bride .profile-person__body::after {
+  top: 8px;
+  height: 22px;
+  background: #ffffff;
+}
+
+.profile-person__dress {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 2;
+  width: 64px;
+  height: 42px;
+  border: 4px solid #43251b;
+  border-radius: 18px 18px 8px 8px;
   background:
-    radial-gradient(circle at 72% 18%, #fff3f5 0 8px, #ff8aa5 8px 13px, transparent 14px),
-    linear-gradient(#8b4a29 0 24%, transparent 24%),
-    linear-gradient(180deg, #ffd4ba 0 62%, #fff 62%);
+    linear-gradient(90deg, transparent 47%, rgba(222, 236, 255, 0.8) 48% 52%, transparent 53%),
+    linear-gradient(#ffffff, #f5fbff);
+  transform: translateX(-50%);
 }
 
 .profile-card p {
