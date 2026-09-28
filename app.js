@@ -36,7 +36,8 @@ const state = {
   audioContext: null,
   audioElement: null,
   musicTimer: null,
-  toastTimer: null
+  toastTimer: null,
+  musicGestureArmed: false
 };
 
 function bindText() {
@@ -187,16 +188,108 @@ function playNote(frequency, duration = 0.18) {
   oscillator.stop(ctx.currentTime + duration + 0.02);
 }
 
+function getMusicButton() {
+  return $('[data-action="music"]');
+}
+
+function getAudioElement() {
+  if (weddingConfig.musicUrl) {
+    if (!state.audioElement) {
+      state.audioElement = new Audio(weddingConfig.musicUrl);
+      state.audioElement.preload = "auto";
+      state.audioElement.loop = true;
+      state.audioElement.setAttribute("playsinline", "");
+      state.audioElement.setAttribute("webkit-playsinline", "");
+    }
+    return state.audioElement;
+  }
+  return null;
+}
+
+async function startMusic({ announce = false } = {}) {
+  const button = getMusicButton();
+  const audio = getAudioElement();
+  if (audio) {
+    try {
+      await audio.play();
+      button?.classList.add("is-active");
+      if (announce) showToast("音乐已播放");
+      return true;
+    } catch {
+      button?.classList.remove("is-active");
+      return false;
+    }
+  }
+
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  state.audioContext ||= new AudioContextClass();
+  if (state.audioContext.state === "suspended") {
+    await state.audioContext.resume().catch(() => undefined);
+  }
+  if (state.musicTimer) {
+    return true;
+  }
+  const notes = [523.25, 659.25, 783.99, 659.25, 698.46, 880];
+  let index = 0;
+  playNote(notes[index]);
+  state.musicTimer = setInterval(() => {
+    index = (index + 1) % notes.length;
+    playNote(notes[index]);
+  }, 420);
+  button?.classList.add("is-active");
+  if (announce) showToast("像素小夜曲已播放");
+  return true;
+}
+
+function armGestureMusicFallback() {
+  if (state.musicGestureArmed) return;
+  state.musicGestureArmed = true;
+
+  const startFromGesture = async (event) => {
+    if (event.target.closest('[data-action="music"]')) return;
+    const started = await startMusic();
+    if (started) {
+      ["pointerdown", "touchstart", "click"].forEach((type) => {
+        document.removeEventListener(type, startFromGesture, true);
+      });
+      state.musicGestureArmed = false;
+    }
+  };
+
+  ["pointerdown", "touchstart", "click"].forEach((type) => {
+    document.addEventListener(type, startFromGesture, true);
+  });
+}
+
+function autoPlayMusic() {
+  if (!weddingConfig.musicUrl && !window.AudioContext && !window.webkitAudioContext) return;
+
+  startMusic().then((started) => {
+    if (!started) {
+      armGestureMusicFallback();
+      showToast("轻触页面即可播放音乐");
+    }
+  });
+
+  document.addEventListener(
+    "WeixinJSBridgeReady",
+    () => {
+      startMusic();
+    },
+    { once: true }
+  );
+}
+
 function toggleMusic(button) {
   if (weddingConfig.musicUrl) {
-    state.audioElement ||= new Audio(weddingConfig.musicUrl);
+    const audio = getAudioElement();
     state.audioElement.loop = true;
-    if (state.audioElement.paused) {
-      state.audioElement.play().catch(() => showToast("浏览器阻止了自动播放，请再点一次"));
-      button.classList.add("is-active");
-      showToast("音乐已播放");
+    if (audio.paused) {
+      startMusic({ announce: true }).then((started) => {
+        if (!started) showToast("浏览器阻止了自动播放，请再点一次");
+      });
     } else {
-      state.audioElement.pause();
+      audio.pause();
       button.classList.remove("is-active");
       showToast("音乐已暂停");
     }
@@ -211,17 +304,7 @@ function toggleMusic(button) {
     return;
   }
 
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  state.audioContext ||= new AudioContextClass();
-  const notes = [523.25, 659.25, 783.99, 659.25, 698.46, 880];
-  let index = 0;
-  playNote(notes[index]);
-  state.musicTimer = setInterval(() => {
-    index = (index + 1) % notes.length;
-    playNote(notes[index]);
-  }, 420);
-  button.classList.add("is-active");
-  showToast("像素小夜曲已播放");
+  startMusic({ announce: true });
 }
 
 function handleRsvp(event) {
@@ -363,9 +446,11 @@ function init() {
   updateCountdown();
   wireActions();
   initReveal();
+  autoPlayMusic();
   setInterval(updateCountdown, 1000);
   setInterval(spawnPetal, 1200);
 }
 
 init();
+
 
