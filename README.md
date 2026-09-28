@@ -17,7 +17,7 @@
 
 ## 素材说明
 
-`assets/pixel-game-wedding-bg.png` 是原创生成的像素游戏风背景底图，`assets/pixel-game-wedding-bg-custom.png` 是根据真人婚纱照替换顶部像素新人的当前使用版本。`assets/photos/` 中是从旧请柬数据源整理出的照片，`assets/map-snapshot.jpg` 是旧请柬里的地址地图截图。页面里的文字、木牌和表单由 HTML/CSS 渲染，方便后续继续调整。
+`assets/pixel-game-wedding-bg-custom.jpg` 是根据真人婚纱照替换顶部像素新人的当前使用版本，并已压缩用于加快打开速度。`assets/photos/` 中是从旧请柬数据源整理并压缩后的照片，`assets/map-snapshot.jpg` 是旧请柬里的地址地图截图。页面里的文字、木牌和表单由 HTML/CSS 渲染，方便后续继续调整。
 
 ## 功能
 

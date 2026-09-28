@@ -65,7 +65,7 @@ function renderPhotos() {
       (item) => `
         <article class="photo-card photo-card--${item.orientation || "portrait"}">
           <div class="photo-window">
-            <img class="photo-img" src="${item.src}" alt="${item.caption}" loading="lazy" />
+            <img class="photo-img" src="${item.src}" alt="${item.caption}" loading="lazy" decoding="async" />
           </div>
           <p>${item.caption}</p>
         </article>
@@ -439,6 +439,29 @@ function wireActions() {
   $("[data-rsvp-form]").addEventListener("submit", handleRsvp);
 }
 
+function waitForImage(image) {
+  if (!image) return Promise.resolve();
+  if (image.complete && image.naturalWidth > 0) return Promise.resolve();
+  return new Promise((resolve) => {
+    image.addEventListener("load", resolve, { once: true });
+    image.addEventListener("error", resolve, { once: true });
+  });
+}
+
+function initLoadingScreen() {
+  const heroImage = $(".scene__bg");
+  const minimumTime = new Promise((resolve) => setTimeout(resolve, 850));
+  const timeout = new Promise((resolve) => setTimeout(resolve, 3800));
+
+  Promise.race([Promise.all([waitForImage(heroImage), minimumTime]), timeout]).then(() => {
+    document.body.classList.add("is-ready");
+    setTimeout(() => {
+      $("[data-loading-screen]")?.remove();
+    }, 420);
+    autoPlayMusic();
+  });
+}
+
 function init() {
   bindText();
   renderPhotos();
@@ -446,7 +469,7 @@ function init() {
   updateCountdown();
   wireActions();
   initReveal();
-  autoPlayMusic();
+  initLoadingScreen();
   setInterval(updateCountdown, 1000);
   setInterval(spawnPetal, 1200);
 }
