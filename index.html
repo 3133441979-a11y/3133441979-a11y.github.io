@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#8edb34" />
+    <meta name="description" content="郑凯铎与尚倩的像素游戏风婚礼邀请函" />
+    <meta name="keywords" content="郑凯铎,尚倩,婚礼邀请,婚礼请柬" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="郑凯铎 ❤️ 尚倩的婚礼邀请" />
+    <meta property="og:title" content="郑凯铎 ❤️ 尚倩的婚礼邀请" />
+    <meta property="og:description" content="诚挚邀请您参加我们的婚礼，见证我们的爱情之路，共享美好时刻！" />
+    <meta property="og:image" content="https://3133441979-a11y.github.io/-/assets/share-card.jpg" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="600" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="郑凯铎 ❤️ 尚倩的婚礼邀请" />
+    <meta name="twitter:description" content="诚挚邀请您参加我们的婚礼，见证我们的爱情之路，共享美好时刻！" />
+    <meta name="twitter:image" content="https://3133441979-a11y.github.io/-/assets/share-card.jpg" />
+    <meta itemprop="name" content="郑凯铎 ❤️ 尚倩的婚礼邀请" />
+    <meta itemprop="description" content="诚挚邀请您参加我们的婚礼，见证我们的爱情之路，共享美好时刻！" />
+    <meta itemprop="image" content="https://3133441979-a11y.github.io/-/assets/share-card.jpg" />
+    <link rel="image_src" href="https://3133441979-a11y.github.io/-/assets/share-card.jpg" />
+    <title>郑凯铎 & 尚倩的婚礼邀请函</title>
+    <link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" fill="%2397df37"/%3E%3Cpath d="M10 39h44v12H10z" fill="%23ffe8a7" stroke="%239f332a" stroke-width="4"/%3E%3Cpath d="M18 16h10v10H18zM36 16h10v10H36z" fill="%23ffced0" stroke="%234d2b1d" stroke-width="3"/%3E%3Cpath d="M28 27h8v8h-8z" fill="%23ffffff" stroke="%234d2b1d" stroke-width="3"/%3E%3C/svg%3E' type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="app" class="game-shell">
+      <section class="scene scene--hero" aria-labelledby="hero-title">
+        <img class="scene__bg" src="./assets/pixel-game-wedding-bg-custom.png" alt="像素游戏风田园婚礼背景" />
+        <div class="scene__overlay"></div>
+
+        <div class="utility-bar" aria-label="快捷操作">
+          <button class="icon-button" type="button" data-action="music" aria-label="播放或暂停音乐" title="音乐">♪</button>
+          <button class="icon-button" type="button" data-action="share" aria-label="分享邀请函" title="分享">↗</button>
+        </div>
+
+        <div class="wood-title reveal">
+          <span>Wedding</span>
+          <strong>Invitation</strong>
+        </div>
+
+        <div class="hero-spacer" aria-hidden="true"></div>
+
+        <div class="sign-stack reveal">
+          <p class="ribbon-sign">好久不见，婚礼见</p>
+          <p class="ribbon-sign">请你来赴一场以爱之名的邀约</p>
+        </div>
+
+        <div class="start-card reveal">
+          <p class="start-card__label">Save the date</p>
+          <h1 id="hero-title"><span data-bind="groomName"></span> & <span data-bind="brideName"></span></h1>
+          <p data-bind="displayDate"></p>
+          <a class="game-button" href="#rsvp">确认赴约</a>
+        </div>
+      </section>
+
+      <section class="scene scene--field">
+        <div class="section-title reveal">&lt; 新人档案 &gt;</div>
+        <div class="profile-board reveal">
+          <article class="profile-card">
+            <div class="portrait portrait--groom" aria-hidden="true">
+              <span data-initial="groom"></span>
+            </div>
+            <p>新郎 · <strong data-bind="groomName"></strong></p>
+          </article>
+          <article class="profile-card">
+            <div class="portrait portrait--bride" aria-hidden="true">
+              <span data-initial="bride"></span>
+            </div>
+            <p>新娘 · <strong data-bind="brideName"></strong></p>
+          </article>
+        </div>
+
+        <article class="paper-panel reveal">
+          <h2>&lt; 星谷来信，邀您赴约 &gt;</h2>
+          <p data-bind="invitationText"></p>
+          <div class="info-list">
+            <p><span class="pixel-icon">◆</span><strong data-bind="displayDate"></strong></p>
+            <p><span class="pixel-icon">◷</span><strong data-bind="lunarDate"></strong></p>
+            <p><span class="pixel-icon">⌖</span><strong data-bind="venueName"></strong></p>
+          </div>
+          <p class="panel-note" data-bind="closingLine"></p>
+        </article>
+
+        <div class="countdown reveal" aria-label="婚礼倒计时">
+          <div><strong data-countdown="days">00</strong><span>天</span></div>
+          <div><strong data-countdown="hours">00</strong><span>时</span></div>
+          <div><strong data-countdown="minutes">00</strong><span>分</span></div>
+          <div><strong data-countdown="seconds">00</strong><span>秒</span></div>
+        </div>
+      </section>
+
+      <section class="scene scene--field">
+        <div class="section-title reveal">&lt; 甜蜜相册 &gt;</div>
+        <div class="photo-stack reveal" data-list="photos"></div>
+      </section>
+
+      <section class="scene scene--field">
+        <div class="section-title reveal">&lt; 今日行程表 &gt;</div>
+        <div class="schedule-list reveal" data-list="schedule"></div>
+      </section>
+
+      <section class="scene scene--field">
+        <div class="section-title reveal">&lt; 婚礼地址导航 &gt;</div>
+        <article class="map-board reveal">
+          <div class="map-paper">
+            <h2 data-bind="venueName"></h2>
+            <div class="pixel-map" aria-hidden="true">
+              <span class="road road--vertical"></span>
+              <span class="road road--horizontal"></span>
+              <span class="map-pin"></span>
+              <span class="nav-chip">导航</span>
+            </div>
+            <p data-bind="venueAddress"></p>
+          </div>
+          <div class="button-row">
+            <a class="game-button" data-link="map" target="_blank" rel="noreferrer">打开导航</a>
+            <button class="game-button game-button--ghost" type="button" data-action="copy-address">复制地址</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="scene scene--field" id="rsvp">
+        <div class="section-title reveal">&lt; 确认赴约 &gt;</div>
+        <form class="rsvp-panel reveal" data-rsvp-form>
+          <input class="honeypot" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <label>
+            <span>你的名字</span>
+            <input name="name" autocomplete="name" placeholder="例如：陈小满" required />
+          </label>
+          <label>
+            <span>出席人数</span>
+            <select name="guests">
+              <option value="1">1 位</option>
+              <option value="2">2 位</option>
+              <option value="3">3 位</option>
+              <option value="4">4 位</option>
+            </select>
+          </label>
+          <fieldset>
+            <legend>是否参加晚宴</legend>
+            <label class="choice"><input type="radio" name="dinner" value="参加" checked />参加</label>
+            <label class="choice"><input type="radio" name="dinner" value="暂不确定" />暂不确定</label>
+          </fieldset>
+          <label>
+            <span>祝福留言</span>
+            <textarea name="message" rows="3" placeholder="写一句祝福给新人吧"></textarea>
+          </label>
+          <button class="game-button game-button--wide" type="submit">提交回执</button>
+          <p class="form-note" data-rsvp-result>回执会在线提交给新人；如果网络异常，会先暂存在这台设备上。</p>
+        </form>
+      </section>
+
+      <section class="scene scene--closing">
+        <div class="closing-card reveal">
+          <p>See you soon</p>
+          <h2 data-bind="closingTitle"></h2>
+          <span data-bind="closingText"></span>
+          <div class="button-row button-row--center">
+            <button class="game-button" type="button" data-action="download-calendar">保存到日历</button>
+            <button class="game-button game-button--ghost" type="button" data-action="back-top">回到顶部</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
+
+
